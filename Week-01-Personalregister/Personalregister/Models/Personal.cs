@@ -11,10 +11,7 @@ public class Personal
   {
     InputHandler(fname, "First name");
     InputHandler(lname, "Last name");
-    if (salary <= 0)
-    {
-      throw new ArgumentException("The monthly salary can not be 0 or less");
-    }
+    SalaryHandler(salary);
 
     Id = Guid.NewGuid();
     FirstName = fname;
@@ -27,11 +24,35 @@ public class Personal
     return $"{FirstName} {LastName}";
   }
 
+  public void ChangeFirstName(string input)
+  {
+    InputHandler(input, "First name");
+    FirstName = input;
+  }
+  public void ChangeLastName(string input)
+  {
+    InputHandler(input, "Last name");
+    LastName = input;
+  }
+  public void ChangeSalary(decimal input)
+  {
+    SalaryHandler(input);
+    SalaryByMonth = input;
+  }
+
   private void InputHandler(string value, string variable)
   {
     if (string.IsNullOrWhiteSpace(value))
     {
       throw new ArgumentException($"{variable} can't be null");
+    }
+  }
+
+  private void SalaryHandler(decimal input)
+  {
+    if (input <= 0)
+    {
+      throw new ArgumentException("The monthly salary can not be 0 or less");
     }
   }
 }

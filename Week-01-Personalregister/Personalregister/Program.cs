@@ -8,6 +8,6 @@ List<Personal> personalList = new()
 	new Personal("Mimmi", "Pigg", 26000),
 };
 var inputHandler = new InputHandler();
-var menu = new MenuHandler(personalList, inputHandler);
+var console = new ConsoleHandler(personalList, inputHandler);
 
-menu.MainMenu();
+console.MainMenu();

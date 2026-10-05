@@ -15,7 +15,15 @@ public class MenuItem
 		Action = action;
 	}
 }
-public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
+
+public enum EditChoice
+{
+	FirstName,
+	LastName,
+	Salary,
+	Delete
+}
+public class ConsoleHandler(List<Personal> PersonalList, InputHandler inputHandler)
 {
 	static void Title(string? title)
 	{
@@ -42,7 +50,7 @@ public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 	{
 		foreach (MenuItem option in options)
 		{
-			if (option.Key == "E")
+			if (option.Key == "E" || option.Key == "D")
 			{
 				Console.ForegroundColor = ConsoleColor.Red;
 				Console.WriteLine($"[{option.Key}] {option.Label}");
@@ -96,8 +104,8 @@ public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 		Title(title: null);
 		List<MenuItem> options = new()
 		{
-			new MenuItem("A", "Add new personal", AddNewPersonal),
-			new MenuItem("V", "Show all personal", ShowAllPersonal),
+			new MenuItem("1", "Add new personal", AddNewPersonal),
+			new MenuItem("2", "Show all personal", ShowAllPersonal),
 			new MenuItem("E", "Exit", () => Environment.Exit(0)),
 		};
 
@@ -153,10 +161,11 @@ public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 	public void ShowAllPersonal()
 	{
 		Title(title: "Show all personal");
-		PersonalTable();
+		PersonalTable(PersonalList);
 
 		List<MenuItem> options = new()
 		{
+			new MenuItem("1", "Edit", ChoosePersonalToEdit),
 			new MenuItem("B", "Back", MainMenu),
 		};
 
@@ -164,15 +173,91 @@ public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 		ShowMenu(options);
 	}
 
-	public void PersonalTable()
+	public void ChoosePersonalToEdit()
+	{
+		Title(title: "Show all personal");
+		PersonalTable(PersonalList);
+
+		List<MenuItem> options = new();
+		for (int i = 0; i < PersonalList.Count; i++)
+		{
+			var personal = PersonalList[i];
+			string key = (i + 1).ToString();
+			options.Add(new MenuItem(key, personal.GetFullname(), () => ShowSinglePersonal(personal, key)));
+		}
+
+		options.Add(new MenuItem("B", "Back", MainMenu));
+
+		Console.WriteLine();
+		ShowMenu(options);
+	}
+
+	public void ShowSinglePersonal(Personal personal, string key)
+	{
+		Title(title: $"Show {personal.GetFullname()}");
+		int keyNumber = int.Parse(key);
+
+		SinglePersonalTable(personal, keyNumber);
+		Console.WriteLine();
+
+		List<MenuItem> options = new()
+		{
+			new MenuItem("1", "Edit first name", () => EditPick(personal, key, EditChoice.FirstName)),
+			new MenuItem("2", "Edit last name", () => EditPick(personal, key, EditChoice.LastName)),
+			new MenuItem("3", "Edit monthly salary", () => EditPick(personal, key, EditChoice.Salary)),
+			new MenuItem("D", "Delete", () => EditPick(personal, key, EditChoice.Delete)),
+			new MenuItem("B", "Back", ShowAllPersonal),
+		};
+
+		ShowMenu(options);
+	}
+
+	public void EditPick(Personal personal, string key, EditChoice input)
+	{
+		switch (input)
+		{
+			case EditChoice.FirstName:
+				personal.ChangeFirstName(
+						inputHandler.ValidateStringInput("First name: "));
+				break;
+
+			case EditChoice.LastName:
+				personal.ChangeLastName(
+						inputHandler.ValidateStringInput("Last name: "));
+				break;
+
+			case EditChoice.Salary:
+				personal.ChangeSalary(
+						inputHandler.ValidateDecimalInput("Monthly salary: "));
+				break;
+
+			case EditChoice.Delete:
+				PersonalList.Remove(personal);
+				ShowAllPersonal();
+				return;
+		}
+
+		ShowSinglePersonal(personal, key);
+	}
+
+	public void PersonalTable(List<Personal> personals)
 	{
 		// detta bad jag ai göra för mig
-		Console.WriteLine($"{"Namn",-20} | {"Lön",10}");
-		Console.WriteLine(new string('-', 33));
+		Console.WriteLine($"{"Key",-1} | {"Namn",-20} | {"Lön",10}");
+		Console.WriteLine(new string('-', 40));
 
-		foreach (Personal personal in PersonalList)
+		for (int i = 0; i < personals.Count; i++)
 		{
-			Console.WriteLine($"{personal.GetFullname(),-20} | {personal.SalaryByMonth,10}");
+			var personal = PersonalList[i];
+			Console.WriteLine($"{i + 1,-3} | {personal.GetFullname(),-20} | {personal.SalaryByMonth,10}");
 		}
+	}
+	public void SinglePersonalTable(Personal personal, int key)
+	{
+		// detta bad jag ai göra för mig
+		Console.WriteLine($"{"Key",-1} | {"Namn",-20} | {"Lön",10}");
+		Console.WriteLine(new string('-', 40));
+
+		Console.WriteLine($"{key + 1,-3} | {personal.GetFullname(),-20} | {personal.SalaryByMonth,10}");
 	}
 }

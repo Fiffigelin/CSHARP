@@ -17,6 +17,9 @@ public class InputHandler
       Console.Write(message);
       string? input = Console.ReadLine();
 
+      // Jag tänker att ett namn INTE ska innehålla siffror MEN det kanske finns namn med siffror?
+      // Samma sak med namnets längd...
+      // if (!string.IsNullOrWhiteSpace(input) && input.All(char.isLetter))
       if (!string.IsNullOrWhiteSpace(input))
       {
         return input;

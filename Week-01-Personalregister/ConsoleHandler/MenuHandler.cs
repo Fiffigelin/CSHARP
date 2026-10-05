@@ -159,6 +159,26 @@ public class MenuHandler(List<Personal> PersonalList)
 	public void ShowAllPersonal()
 	{
 		Title(title: "Show all personal");
-		Console.WriteLine("Nu visar vi alla i personallistan");
+		PersonalTable();
+
+		List<MenuItem> options = new()
+		{
+			new MenuItem("B", "Back", MainMenu),
+		};
+
+		Console.WriteLine();
+		ShowMenu(options);
+	}
+
+	public void PersonalTable()
+	{
+		// detta bad jag ai göra för mig
+		Console.WriteLine($"{"Namn",-20} | {"Lön",10}");
+		Console.WriteLine(new string('-', 33));
+
+		foreach (Personal personal in PersonalList)
+		{
+			Console.WriteLine($"{personal.GetFullname(),-20} | {personal.SalaryByMonth,10}");
+		}
 	}
 }

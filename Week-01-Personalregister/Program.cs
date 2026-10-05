@@ -3,12 +3,11 @@
 
 
 var Menu = new MenuHandler();
-var PersonalHandler = new PersonalHandler();
 List<MenuItem> options = new()
 {
-	new MenuItem(MenuItem.ItemKey.A, "Add new personal", PersonalHandler.AddNewPersonal),
-	new MenuItem(MenuItem.ItemKey.V, "Show all personal", PersonalHandler.ShowAllPersonal),
-	new MenuItem(MenuItem.ItemKey.E, "Exit", () => Environment.Exit(0)),
+	new MenuItem("A", "Add new personal", Menu.AddNewPersonal),
+	new MenuItem("V", "Show all personal", Menu.ShowAllPersonal),
+	new MenuItem("E", "Exit", () => Environment.Exit(0)),
 };
 // var personalList = new List<Personal>();
 

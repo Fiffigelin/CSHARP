@@ -1,27 +1,15 @@
 ﻿using Personalregister.ConsoleHandler;
-// using Personalregister.Models;
+using Personalregister.Models;
 
 
-var Menu = new MenuHandler();
+var personalList = new List<Personal>();
+var Menu = new MenuHandler(personalList);
 List<MenuItem> options = new()
 {
 	new MenuItem("A", "Add new personal", Menu.AddNewPersonal),
 	new MenuItem("V", "Show all personal", Menu.ShowAllPersonal),
 	new MenuItem("E", "Exit", () => Environment.Exit(0)),
 };
-// var personalList = new List<Personal>();
-
-// Console.WriteLine("Skapa ny personalkonto");
-// Console.Write("Fyll i förnamn: ");
-// string firstName = Console.ReadLine();
-
-// Console.Write("Fyll i efternamn: ");
-// string lastName = Console.ReadLine();
-
-// Console.Write("Fyll i månadslön: ");
-// decimal salary = decimal.Parse(Console.ReadLine());
-
-// personalList.Add(new Personal(firstName, lastName, salary));
 
 // foreach (var personal in personalList)
 // {
@@ -30,4 +18,4 @@ List<MenuItem> options = new()
 // 	Console.ReadLine();
 // }
 
-Menu.ShowMenu(options);
+Menu.MainMenu();

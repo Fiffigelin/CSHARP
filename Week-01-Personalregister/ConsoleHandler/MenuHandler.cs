@@ -1,4 +1,4 @@
-using System.Drawing;
+using Personalregister.Models;
 
 namespace Personalregister.ConsoleHandler;
 
@@ -15,7 +15,7 @@ public class MenuItem
 		Action = action;
 	}
 }
-public class MenuHandler()
+public class MenuHandler(List<Personal> PersonalList)
 {
 	public
 	static void Title(string? title)
@@ -41,7 +41,6 @@ public class MenuHandler()
 
 	public void ShowMenu(List<MenuItem> options)
 	{
-		Title(title: null);
 		foreach (MenuItem option in options)
 		{
 			if (option.Key == "E")
@@ -93,10 +92,68 @@ public class MenuHandler()
 		}
 	}
 
+	public void MainMenu()
+	{
+		Title(title: null);
+		List<MenuItem> options = new()
+		{
+			new MenuItem("A", "Add new personal", AddNewPersonal),
+			new MenuItem("V", "Show all personal", ShowAllPersonal),
+			new MenuItem("E", "Exit", () => Environment.Exit(0)),
+		};
+
+		ShowMenu(options);
+	}
+
+	public void SavePersonalMenu(Personal personal)
+	{
+		List<MenuItem> options = new()
+		{
+			new MenuItem("S", "Save", () => SaveNewPersonal(personal)),
+			new MenuItem("B", "Back", MainMenu)
+		};
+
+		Console.WriteLine();
+		ShowMenu(options);
+	}
+
+	public void SaveNewPersonal(Personal personal)
+	{
+		PersonalList.Add(personal);
+		Console.WriteLine();
+
+		if (PersonalList.Contains(personal))
+		{
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Personal added successfully!");
+			Console.ResetColor();
+			Console.WriteLine("Press any key to return to mainpage");
+		}
+		else
+		{
+			Console.ForegroundColor = ConsoleColor.Red;
+			Console.WriteLine("Something happened! Please try again.");
+			Console.ResetColor();
+			Console.WriteLine("Press any key to return to mainpage");
+		}
+		Console.ReadLine();
+		MainMenu();
+	}
+
 	public void AddNewPersonal()
 	{
+
 		Title(title: "Add New Personal");
-		Console.WriteLine("Nu ska vi skapa en ny personal :)");
+		Console.Write("Firstname: ");
+		string firstName = Console.ReadLine();
+
+		Console.Write("Lastname: ");
+		string lastName = Console.ReadLine();
+
+		Console.Write("Monthly salary: ");
+		decimal salary = decimal.Parse(Console.ReadLine());
+
+		SavePersonalMenu(new Personal(firstName, lastName, salary));
 	}
 
 	public void ShowAllPersonal()

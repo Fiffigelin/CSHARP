@@ -11,7 +11,7 @@ public class Personal
   {
     InputHandler(fname, "First name");
     InputHandler(lname, "Last name");
-    if (salary < 0)
+    if (salary <= 0)
     {
       throw new ArgumentException("The monthly salary can not be 0 or less");
     }

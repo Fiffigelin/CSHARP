@@ -1,8 +1,4 @@
-﻿using Personalregister.ConsoleHandler;
-using Personalregister.Models;
-
-
-List<Personal> personalList = new()
+﻿List<Personal> personalList = new()
 {
 	new Personal("Kalle", "Anka", 18000),
 	new Personal("Kajsa", "Anka", 16800),

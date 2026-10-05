@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Personalregister.Tests/Personalregister.Tests.csproj" />
+  <Project Path="Personalregister/Personalregister.csproj" />
+</Solution>

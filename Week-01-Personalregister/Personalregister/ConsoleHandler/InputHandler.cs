@@ -2,6 +2,14 @@ namespace Personalregister.ConsoleHandler;
 
 public class InputHandler
 {
+  public void ErrorMessage()
+  {
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine("The field cannot be empty.");
+    Console.WriteLine();
+    Console.ResetColor();
+  }
+
   public string ValidateStringInput(string message)
   {
     while (true)
@@ -14,10 +22,26 @@ public class InputHandler
         return input;
       }
 
-      Console.ForegroundColor = ConsoleColor.Yellow;
-      Console.WriteLine("The field cannot be empty.");
-      Console.WriteLine();
-      Console.ResetColor();
+      ErrorMessage();
+    }
+  }
+
+  public decimal ValidateDecimalInput(string message)
+  {
+    while (true)
+    {
+      Console.Write(message);
+      string? input = Console.ReadLine();
+
+      if (decimal.TryParse(input, out decimal result))
+      {
+        if (result > 0)
+        {
+          return result;
+        }
+      }
+
+      ErrorMessage();
     }
   }
 }

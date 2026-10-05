@@ -141,13 +141,11 @@ public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 
 	public void AddNewPersonal()
 	{
-
 		Title(title: "Add New Personal");
+
 		string firstName = inputHandler.ValidateStringInput("Firstname: ");
 		string lastName = inputHandler.ValidateStringInput("Lastname: ");
-
-		Console.Write("Monthly salary: ");
-		decimal salary = decimal.Parse(Console.ReadLine());
+		decimal salary = inputHandler.ValidateDecimalInput("Monthly salary: ");
 
 		SavePersonalMenu(new Personal(firstName, lastName, salary));
 	}

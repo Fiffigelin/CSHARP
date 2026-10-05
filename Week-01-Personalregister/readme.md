@@ -30,7 +30,7 @@ Försöker göra det så enkelt som möjligt samtidigt som det ska fungera.
 Jag la till test för det är något jag vet att jag kämpar med. Här tog jag hjälp av AI. 
 
 Mina tankar för vad som behöver förbättras/läggas till:
-[] Säkerställa inputs
-[] Fixa klassen med en private set och errorhandling
-[] Lägga till anställningsformer, såsom heltid, deltid, timanställd,
-[] kunna gå in i enskild personal och köra edit, delete
+- [] Säkerställa inputs
+- [] Fixa klassen med en private set och errorhandling
+- [] Lägga till anställningsformer, såsom heltid, deltid, timanställd,
+- [] kunna gå in i enskild personal och köra edit, delete

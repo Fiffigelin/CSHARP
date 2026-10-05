@@ -15,9 +15,8 @@ public class MenuItem
 		Action = action;
 	}
 }
-public class MenuHandler(List<Personal> PersonalList)
+public class MenuHandler(List<Personal> PersonalList, InputHandler inputHandler)
 {
-	public
 	static void Title(string? title)
 	{
 		Console.Clear();
@@ -144,11 +143,8 @@ public class MenuHandler(List<Personal> PersonalList)
 	{
 
 		Title(title: "Add New Personal");
-		Console.Write("Firstname: ");
-		string firstName = Console.ReadLine();
-
-		Console.Write("Lastname: ");
-		string lastName = Console.ReadLine();
+		string firstName = inputHandler.ValidateStringInput("Firstname: ");
+		string lastName = inputHandler.ValidateStringInput("Lastname: ");
 
 		Console.Write("Monthly salary: ");
 		decimal salary = decimal.Parse(Console.ReadLine());

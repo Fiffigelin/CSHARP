@@ -33,4 +33,4 @@ Mina tankar för vad som behöver förbättras/läggas till:
 - [x] Säkerställa inputs
 - [x] Fixa klassen med en private set och errorhandling
 - [ ] Lägga till anställningsformer, såsom heltid, deltid, timanställd,
-- [ ] kunna gå in i enskild personal och köra edit, delete
+- [x] kunna gå in i enskild personal och köra edit, delete

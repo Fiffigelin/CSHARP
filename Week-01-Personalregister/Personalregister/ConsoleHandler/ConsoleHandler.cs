@@ -82,7 +82,7 @@ public class ConsoleHandler(List<Personal> PersonalList, InputHandler inputHandl
 		while (true)
 		{
 			Console.WriteLine();
-			Console.Write("Välj: ");
+			Console.Write("Choose: ");
 
 			var pick = Console.ReadLine();
 			var option = options.FirstOrDefault(o => o.Key == pick?.ToUpper());

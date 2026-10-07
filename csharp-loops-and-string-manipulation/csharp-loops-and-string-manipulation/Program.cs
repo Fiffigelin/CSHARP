@@ -84,7 +84,6 @@ namespace csharp_loops_and_string_manipulation
       } while(!isValid); // samma sak som isValid == false
       
       Console.WriteLine();
-      Console.WriteLine("Du behöver betala detta biljettpris.");
       ReturnPriceMessage(ReturnPriceByAge(age));
 
       Console.WriteLine();
@@ -225,7 +224,11 @@ namespace csharp_loops_and_string_manipulation
     // Returnerar int istället för meddelande för att kunna användas av både case 1 och 2
     static int ReturnPriceByAge(int age)
     {
-      if(age < 20)
+      if(age < 5 || age > 100)
+      {
+        return 0;
+      }
+      else if(age < 20)
       {
         return 80;
       }
@@ -245,7 +248,11 @@ namespace csharp_loops_and_string_manipulation
     // det är lättare att testa funktionalitet om metoderna är mindre
     static void ReturnPriceMessage(int price)
     {
-      if(price == 80)
+      if(price == 0)
+      {
+        Console.WriteLine("Grattis! Du får gå gratis!");
+      }
+      else if(price == 80)
       {
         Console.WriteLine($"Ungdomspris: {price}kr");
       }

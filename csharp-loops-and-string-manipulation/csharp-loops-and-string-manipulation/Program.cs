@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 /* 
   Inget test denna gång och så enkelt det bara går.
@@ -27,6 +28,9 @@ namespace csharp_loops_and_string_manipulation
           case "2":
             CalculateGroupTicketPrice();
             break;
+          case "3":
+            PrintOutInputLoop();
+            break;
           default:
             Console.WriteLine("Felaktig uppgift. Försök igen!");
             Console.ReadLine();
@@ -47,6 +51,7 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine("= Välj ditt val med någon av dessa siffror =");
       Console.WriteLine("[1] Räkna ut biljettpris");
       Console.WriteLine("[2] Räkna ut grupp-pris");
+      Console.WriteLine("[3] Loopa ut input 10 gånger");
       Console.WriteLine("[0] Avsluta");
       Console.WriteLine();
     }
@@ -139,6 +144,42 @@ namespace csharp_loops_and_string_manipulation
       Console.ReadLine();
 
       MainMenu();
+    }
+
+    // Case 3:
+    // Tar input från användaren som returneras utan radbrytning med numrering
+    // totalt 10 intervaller via en for-loop
+    static void PrintOutInputLoop()
+    {
+      bool isValid = false;
+      string input = string.Empty;
+
+      Console.WriteLine("== SKRIV EN INPUT MED 5 TECKEN ELLER MER ==");
+      do
+      {
+        Console.Write($"Input: ");
+        input = Console.ReadLine();
+
+        if(input.Length <= 4)
+        {
+          Console.WriteLine("Felaktigt svar. Var god och försök igen.");
+        }
+        else
+        {
+          isValid = true;
+        }
+      } while(!isValid);
+
+      Console.WriteLine();
+      Console.WriteLine("Output:");
+      for(int i = 1; i <= 10; i ++)
+      {
+        Console.Write($"{i}. {input}. ");
+      }
+
+      Console.WriteLine();
+      Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
+      Console.ReadLine();
     }
 
     // Refaktorering:

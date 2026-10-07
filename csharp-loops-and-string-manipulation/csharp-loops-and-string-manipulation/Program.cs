@@ -31,6 +31,9 @@ namespace csharp_loops_and_string_manipulation
           case "3":
             PrintOutInputLoop();
             break;
+          case "4":
+            PrintTheThirdWord();
+            break;
           default:
             Console.WriteLine("Felaktig uppgift. Försök igen!");
             Console.ReadLine();
@@ -52,6 +55,7 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine("[1] Räkna ut biljettpris");
       Console.WriteLine("[2] Räkna ut grupp-pris");
       Console.WriteLine("[3] Loopa ut input 10 gånger");
+      Console.WriteLine("[4] Tredje ordet");
       Console.WriteLine("[0] Avsluta");
       Console.WriteLine();
     }
@@ -180,6 +184,39 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
+    }
+
+    // Case 4:
+    // Metoden tar in en input
+    // räknar varje ord och skriver ut 3:e ordet
+    static void PrintTheThirdWord()
+    {
+      bool isValid = false;
+      Console.Clear();
+      Console.WriteLine("== Vänligen skriv en mening på minst 5 ord ==");
+
+      do
+      {
+        Console.Write("Din mening: ");
+        // läs mer om Split och StringSplitOptions på: https://learn.microsoft.com/en-us/dotnet/standard/base-types/divide-up-strings
+        var words = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        if(words.Length < 5) 
+        {
+          Console.WriteLine("Inte tillräckligt många ord. Var god och försök igen.");
+        }
+        else
+        {
+          Console.WriteLine(words[2]);
+          isValid = true;
+        }
+
+      } while(!isValid); // samma sak som isValid == false
+
+      Console.WriteLine();
+      Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
+      Console.ReadLine();
+
     }
 
     // Refaktorering:

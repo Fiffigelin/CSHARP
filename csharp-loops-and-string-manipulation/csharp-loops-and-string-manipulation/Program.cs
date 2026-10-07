@@ -193,7 +193,7 @@ namespace csharp_loops_and_string_manipulation
     {
       bool isValid = false;
       Console.Clear();
-      Console.WriteLine("== Vänligen skriv en mening på minst 5 ord ==");
+      Console.WriteLine("== Vänligen skriv en mening på minst 3 ord ==");
 
       do
       {
@@ -207,7 +207,9 @@ namespace csharp_loops_and_string_manipulation
         }
         else
         {
-          Console.WriteLine(words[2]);
+          // väljer det tredje elementet i arrayen
+          string thirdWord = words[2];
+          Console.WriteLine(thirdWord);
           isValid = true;
         }
 

@@ -225,17 +225,26 @@ namespace csharp_loops_and_string_manipulation
     */
     static int ReturnPriceByAge(int age)
     {
-      if(age < 5 || age > 100)
+      if(age < 20)
       {
-        return 0;
-      }
-      else if(age < 20)
+        if(age < 5)
+        {
+          return 0;
+        }
+        else
+        {
+          return 80;
+        }
+      } else if(age > 64)
       {
-        return 80;
-      }
-      else if(age > 64)
-      {
-        return 90;
+        if(age > 100)
+        {
+          return 0;
+        }
+        else
+        {
+          return 90;
+        }
       }
       else
       {

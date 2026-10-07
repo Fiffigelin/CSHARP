@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 /* 
   Inget test denna gång och så enkelt det bara går.
@@ -43,8 +42,11 @@ namespace csharp_loops_and_string_manipulation
       }
     }
 
-    // Skriver menyerna först
-    // sedan bryter jag ned funktionalitet som används på flera ställen till mindre testbara funktioner
+    /*
+     * Skriver menyerna först
+     * sedan bryter jag ned funktionalitet
+     * som används på flera ställen till mindre testbara funktioner
+    */
 
     // Huvudmenyn:
     static void MainMenu()
@@ -61,7 +63,7 @@ namespace csharp_loops_and_string_manipulation
     }
 
     // Case 1:
-    // Visar biljettpriset utifrån användarens svar angående ålder
+    // Visar biljettpriset utifrån användarens svar utifrån ålder
     static void ShowTicketPrice()
     {
       int age;
@@ -89,12 +91,11 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
-
-      MainMenu();
     }
 
     // Case 2:
-    // Räkna ut grupp-pris för ett sällskap
+    // Räkna ut biljettpris för ett sällskap beroende på
+    // besökarnas antal och ålder
     static void CalculateGroupTicketPrice()
     {
       int visitors;
@@ -145,13 +146,11 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
-
-      MainMenu();
     }
 
     // Case 3:
     // Tar input från användaren som returneras utan radbrytning med numrering
-    // totalt 10 intervaller via en for-loop
+    // vilket skrivs ut 10 gånger
     static void PrintOutInputLoop()
     {
       bool isValid = false;
@@ -174,7 +173,7 @@ namespace csharp_loops_and_string_manipulation
       } while(!isValid);
 
       Console.WriteLine();
-      Console.WriteLine("Output:");
+
       for(int i = 1; i <= 10; i ++)
       {
         Console.Write($"{i}. {input}. ");
@@ -186,7 +185,7 @@ namespace csharp_loops_and_string_manipulation
     }
 
     // Case 4:
-    // Metoden tar in en input
+    // Metoden tar in en input av en mening på 3 ord eller mer
     // räknar varje ord och skriver ut 3:e ordet
     static void PrintTheThirdWord()
     {
@@ -197,10 +196,10 @@ namespace csharp_loops_and_string_manipulation
       do
       {
         Console.Write("Din mening: ");
-        // läs mer om Split och StringSplitOptions på: https://learn.microsoft.com/en-us/dotnet/standard/base-types/divide-up-strings
+        // läs mer om Split och StringSplitOptions här: https://learn.microsoft.com/en-us/dotnet/standard/base-types/divide-up-strings
         var words = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        if(words.Length < 5) 
+        if(words.Length < 3) 
         {
           Console.WriteLine("Inte tillräckligt många ord. Var god och försök igen.");
         }
@@ -212,16 +211,18 @@ namespace csharp_loops_and_string_manipulation
           isValid = true;
         }
 
-      } while(!isValid); // samma sak som isValid == false
+      } while(!isValid);
 
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
-
     }
 
-    // Refaktorering:
-    // Returnerar int istället för meddelande för att kunna användas av både case 1 och 2
+    /* 
+     * Refaktorering
+     * Returnerar int istället för meddelande
+     * för att kunna användas av både case 1 och 2
+    */
     static int ReturnPriceByAge(int age)
     {
       if(age < 5 || age > 100)
@@ -241,11 +242,12 @@ namespace csharp_loops_and_string_manipulation
         return 120;
       }
     }
-
-    // Refactorering
-    // Denna if kan ju egentligen ligga i case 1 metoden.
-    // kanske flyttar in den där...
-    // det är lättare att testa funktionalitet om metoderna är mindre
+    /*
+     * Refactorering
+     * Denna if-sats kan ju egentligen ligga i case 1 metoden.
+     * kanske flyttar in den där...
+     * det är lättare att testa funktionalitet om metoderna är mindre
+     */
     static void ReturnPriceMessage(int price)
     {
       if(price == 0)

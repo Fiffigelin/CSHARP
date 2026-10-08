@@ -60,6 +60,7 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine("[4] Tredje ordet");
       Console.WriteLine("[0] Avsluta");
       Console.WriteLine();
+      Console.Write("Var god välj val: ");
     }
 
     // Case 1:
@@ -86,11 +87,28 @@ namespace csharp_loops_and_string_manipulation
       } while(!isValid); // samma sak som isValid == false
       
       Console.WriteLine();
-      ReturnPriceMessage(ReturnPriceByAge(age));
+      int price = (ReturnPriceByAge(age));
 
-      Console.WriteLine();
-      Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
-      Console.ReadLine();
+      switch(price)
+      {
+        case 0:
+          Console.WriteLine("Grattis! Du får gå gratis!");
+          break;
+        case 80:
+          Console.WriteLine($"Ungdomspris: {price}kr");
+          break;
+        case 90:
+            Console.WriteLine($"Pensionärspris: {price}kr");
+          break;
+        case 120:
+          Console.WriteLine($"Standardpris: {price}kr");
+          break;
+        default:
+          Console.WriteLine($"Något gick fel.");
+          break;
+      }
+
+      ReturnToMainMenu();
     }
 
     // Case 2:
@@ -143,9 +161,7 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine($"Antal gäster: {visitors}");
       Console.WriteLine($"Summa: {sum}kr");
 
-      Console.WriteLine();
-      Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
-      Console.ReadLine();
+      ReturnToMainMenu();
     }
 
     // Case 3:
@@ -179,9 +195,7 @@ namespace csharp_loops_and_string_manipulation
         Console.Write($"{i}. {input}. ");
       }
 
-      Console.WriteLine();
-      Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
-      Console.ReadLine();
+      ReturnToMainMenu();
     }
 
     // Case 4:
@@ -213,6 +227,11 @@ namespace csharp_loops_and_string_manipulation
 
       } while(!isValid);
 
+      ReturnToMainMenu();
+    }
+
+    static void ReturnToMainMenu()
+    {
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
@@ -249,31 +268,6 @@ namespace csharp_loops_and_string_manipulation
       else
       {
         return 120;
-      }
-    }
-    /*
-     * Refactorering
-     * Denna if-sats kan ju egentligen ligga i case 1 metoden.
-     * kanske flyttar in den där...
-     * det är lättare att testa funktionalitet om metoderna är mindre
-     */
-    static void ReturnPriceMessage(int price)
-    {
-      if(price == 0)
-      {
-        Console.WriteLine("Grattis! Du får gå gratis!");
-      }
-      else if(price == 80)
-      {
-        Console.WriteLine($"Ungdomspris: {price}kr");
-      }
-      else if(price == 90)
-      {
-        Console.WriteLine($"Pensionärspris: {price}kr");
-      }
-      else
-      {
-        Console.WriteLine($"Standardpris: {price}kr");
       }
     }
   }

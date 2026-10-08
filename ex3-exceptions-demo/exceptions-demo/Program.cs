@@ -68,7 +68,7 @@ namespace ExceptionsDemo
             }
 
             // Exempel på metod som själv kastar ett undantag (throw)
-            static double ProcessFile(string fileName)
+            static int ProcessFile(string fileName)
             {
                 // Om filnamnet är tomt: logiskt fel vi vill signalera
                 if (string.IsNullOrWhiteSpace(fileName))

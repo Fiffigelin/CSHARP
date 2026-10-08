@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="exceptions-demo-tests/exceptions-demo-tests.csproj" />
+  <Project Path="exceptions-demo/exceptions-demo.csproj" />
+</Solution>

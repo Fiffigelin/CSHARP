@@ -1,4 +1,6 @@
-﻿namespace ExceptionsDemo
+﻿using System;
+
+namespace ExceptionsDemo
 {
     internal class Program
     {
@@ -12,6 +14,7 @@
                 {
                     Console.WriteLine("Försöker läsa fil och räkna...");
                     var path = Path.Combine(AppContext.BaseDirectory, "numbers.txt");
+
                     var result = ProcessFile(path);
                   
                     Console.WriteLine($"\nResultat: {result}");
@@ -67,24 +70,15 @@
                     int number = int.Parse(line); // Kan ge FormatException
 
                     // Division: kan ge DivideByZeroException
-                    return 100.0 / number;
+                    // DENNA! DENNA DREV MIG TILL VANSINNE!
+                    // 100.0 är ju en double XD
+                    return 100 / number;
                 }
-                catch (FormatException ex)
-                {
-                    // Vi kan logga eller omformulera felet
-                    Console.WriteLine($"Formatfel i ProcessFile: {ex.Message}");
-                    // Vi kan välja att låta metoden "kasta upp" felet
-                    throw; // När du i `catch` bara vill logga/analysera,
-                           // men låta anroparen (t.ex. en högre nivå i applikationen)
-                           // bestämma hur man ska återhämta sig. 
-                }
-                catch (Exception ex)
-                {
-                    // Om vi vill ge en mer meningsfull feltyp till anroparen
-                    throw new InvalidOperationException(
-                    "Det gick inte att processa filen.",
-                    ex); // InnerException = ursprunglig fel
-                }
+
+                /* Ingen catch finns kvar i metoden utan det kastas upp till
+                 * de andra execptions i Main().
+                 */
+
                 finally
                 {
                     // Garanterad stängning av resurs

@@ -70,7 +70,7 @@ namespace csharp_loops_and_string_manipulation
       Console.Clear();
       Console.WriteLine("== Vänligen ange din ålder med siffror ==");
 
-      int age = ValidateAge();
+      int age = ValidateAge("Ålder: ");
 
       Console.WriteLine();
       int price = (ReturnPriceByAge(age));
@@ -123,7 +123,7 @@ namespace csharp_loops_and_string_manipulation
 
       for(int i = 0; i < visitors; i++)
       {
-        int age = ValidateAge();
+        int age = ValidateAge($"Ålder för besökare {i + 1}: ");
         sum += ReturnPriceByAge(age);
       }
 
@@ -215,14 +215,14 @@ namespace csharp_loops_and_string_manipulation
      * Skalbarhet och testbarhet ökas
     */
 
-    static int ValidateAge()
+    static int ValidateAge(string message)
     {
       int age;
       bool isValid;
 
       do
       {
-        Console.Write("Ålder: ");
+        Console.Write(message);
         string input = Console.ReadLine();
 
         isValid = int.TryParse(input, out age);

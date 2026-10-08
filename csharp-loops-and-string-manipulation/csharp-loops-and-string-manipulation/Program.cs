@@ -67,25 +67,11 @@ namespace csharp_loops_and_string_manipulation
     // Visar biljettpriset utifrån användarens svar utifrån ålder
     static void ShowTicketPrice()
     {
-      int age;
-      bool isValid = false;
-
       Console.Clear();
       Console.WriteLine("== Vänligen ange din ålder med siffror ==");
 
-      do
-      {
-        Console.Write("Ålder: ");
-        string input = Console.ReadLine();
+      int age = ValidateAge();
 
-        isValid = int.TryParse(input, out age);
-
-        if(!isValid || age < 0)
-        {
-          Console.WriteLine("Felaktigt svar. Var god och försök igen.");
-        }
-      } while(isValid && age < 0);
-      
       Console.WriteLine();
       int price = (ReturnPriceByAge(age));
 
@@ -137,22 +123,8 @@ namespace csharp_loops_and_string_manipulation
 
       for(int i = 0; i < visitors; i++)
       {
-        int age;
-        do
-        {
-          Console.Write($"Ålder för gäst {i + 1}: ");
-          string input = Console.ReadLine();
-
-          isValid = int.TryParse(input, out age);
-
-          if(!isValid || age < 0)
-          {
-            Console.WriteLine("Felaktigt svar. Var god och försök igen.");
-          }
-
-        } while(!isValid || age < 0);
-
-         sum += ReturnPriceByAge(age);
+        int age = ValidateAge();
+        sum += ReturnPriceByAge(age);
       }
 
       Console.WriteLine();
@@ -234,6 +206,34 @@ namespace csharp_loops_and_string_manipulation
       Console.WriteLine();
       Console.WriteLine("Tryck valfri knapp för att återgå till startmenyn");
       Console.ReadLine();
+    }
+
+    /*
+     * Refaktorering
+     * Returnerar int som age
+     * då funktionen används i case 1 och 2
+     * Skalbarhet och testbarhet ökas
+    */
+
+    static int ValidateAge()
+    {
+      int age;
+      bool isValid;
+
+      do
+      {
+        Console.Write("Ålder: ");
+        string input = Console.ReadLine();
+
+        isValid = int.TryParse(input, out age);
+
+        if(!isValid || age < 0)
+        {
+          Console.WriteLine("Felaktigt svar. Var god och försök igen.");
+        }
+      } while(isValid && age < 0);
+
+      return age;
     }
 
     /* 

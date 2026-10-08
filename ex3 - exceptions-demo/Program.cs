@@ -7,13 +7,32 @@ namespace ExceptionsDemo
         static void Main(string[] args)
         {
             {
+                /*
+                * Jag har skapat flera filer för de olika utfallen
+                * Bara att kommentera in eller ut vilken man vill testa :)
+                * Fick inte de andra filerna att kopieras till \Bin
+                * Ändrade från numbers.txt => *.txt i csproj
+                */
                 Console.WriteLine("=== Start av programmet ===");
 
                 // Exempel 1: try-catch-finally
                 try
                 {
                     Console.WriteLine("Försöker läsa fil och räkna...");
+                    // Ingen exception kastas
                     var path = Path.Combine(AppContext.BaseDirectory, "numbers.txt");
+
+                    // FileNotFoundException
+                    // var path = Path.Combine(AppContext.BaseDirectory, "numbers00.txt");
+                    
+                    // FormatException
+                    // var path = Path.Combine(AppContext.BaseDirectory, "format-exception.txt");
+
+                    // DivideByZeroException
+                    // var path = Path.Combine(AppContext.BaseDirectory, "divide-by-zero-exception.txt");
+
+                    // Exception
+                    //var path = Path.Combine(AppContext.BaseDirectory, "exception.txt");
 
                     var result = ProcessFile(path);
                   

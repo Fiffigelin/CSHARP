@@ -68,7 +68,7 @@ namespace csharp_loops_and_string_manipulation
     static void ShowTicketPrice()
     {
       int age;
-      bool isValid;
+      bool isValid = false;
 
       Console.Clear();
       Console.WriteLine("== Vänligen ange din ålder med siffror ==");
@@ -80,11 +80,11 @@ namespace csharp_loops_and_string_manipulation
 
         isValid = int.TryParse(input, out age);
 
-        if(!isValid)
+        if(!isValid || age < 0)
         {
           Console.WriteLine("Felaktigt svar. Var god och försök igen.");
         }
-      } while(!isValid); // samma sak som isValid == false
+      } while(isValid && age < 0);
       
       Console.WriteLine();
       int price = (ReturnPriceByAge(age));
@@ -129,31 +129,30 @@ namespace csharp_loops_and_string_manipulation
 
         isValid = int.TryParse(answer, out visitors);
 
-        if(!isValid)
+        if(!isValid || visitors <= 0)
         {
           Console.WriteLine("Felaktigt svar. Var god och försök igen.");
         }
-
-      } while(!isValid);
+      } while(!isValid || visitors <= 0);
 
       for(int i = 0; i < visitors; i++)
       {
+        int age;
         do
         {
-          Console.Write($"Ålder för gäst {i+1}: ");
+          Console.Write($"Ålder för gäst {i + 1}: ");
           string input = Console.ReadLine();
 
-          isValid = int.TryParse(input, out int age);
+          isValid = int.TryParse(input, out age);
 
-          if(!isValid)
+          if(!isValid || age < 0)
           {
             Console.WriteLine("Felaktigt svar. Var god och försök igen.");
           }
-          else
-          {
-            sum += ReturnPriceByAge(age);
-          }
-        } while(!isValid);
+
+        } while(!isValid || age < 0);
+
+         sum += ReturnPriceByAge(age);
       }
 
       Console.WriteLine();

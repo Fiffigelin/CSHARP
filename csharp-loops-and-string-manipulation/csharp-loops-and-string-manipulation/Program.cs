@@ -2,6 +2,10 @@
 
 /* 
   Inget test denna gång och så enkelt det bara går.
+  Jag har under min utbildning fått till mig att undvika ? för nullable.
+  Så det tog lite emot att använda det för att få bort varningar.
+
+  Meddela mig om jag har missförstått det med nullable och varningarna.
 */
 namespace csharp_loops_and_string_manipulation
 {
@@ -14,7 +18,7 @@ namespace csharp_loops_and_string_manipulation
       while(isRunning)
       {
         MainMenu();
-        string choice = Console.ReadLine();
+        string? choice = Console.ReadLine();
 
         switch(choice)
         {
@@ -111,7 +115,7 @@ namespace csharp_loops_and_string_manipulation
       do
       {
         Console.Write("Antal besökare: ");
-        string answer = Console.ReadLine();
+        string? answer = Console.ReadLine();
 
         isValid = int.TryParse(answer, out visitors);
 
@@ -121,6 +125,8 @@ namespace csharp_loops_and_string_manipulation
         }
       } while(!isValid || visitors <= 0);
 
+      // För varje besökare valideras ålder
+      // lägger till summan av varje godkänd ålder till summeringen
       for(int i = 0; i < visitors; i++)
       {
         int age = ValidateAge($"Ålder för besökare {i + 1}: ");
@@ -141,7 +147,7 @@ namespace csharp_loops_and_string_manipulation
     static void PrintOutInputLoop()
     {
       bool isValid = false;
-      string input = string.Empty;
+      string? input;
 
       Console.WriteLine("== SKRIV EN INPUT MED 5 TECKEN ELLER MER ==");
       do
@@ -149,7 +155,7 @@ namespace csharp_loops_and_string_manipulation
         Console.Write($"Input: ");
         input = Console.ReadLine();
 
-        if(input.Length <= 4)
+        if(input == null || input.Length <= 4)
         {
           Console.WriteLine("Felaktigt svar. Var god och försök igen.");
         }
@@ -161,6 +167,7 @@ namespace csharp_loops_and_string_manipulation
 
       Console.WriteLine();
 
+      // Loopar användarens godkända input
       for(int i = 1; i <= 10; i ++)
       {
         Console.Write($"{i}. {input}. ");
@@ -182,9 +189,10 @@ namespace csharp_loops_and_string_manipulation
       {
         Console.Write("Din mening: ");
         // läs mer om Split och StringSplitOptions här: https://learn.microsoft.com/en-us/dotnet/standard/base-types/divide-up-strings
-        var words = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        string? input = Console.ReadLine();
+        var words = input?.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        if(words.Length < 3) 
+        if(words == null || words.Length < 3) 
         {
           Console.WriteLine("Inte tillräckligt många ord. Var god och försök igen.");
         }
@@ -223,7 +231,7 @@ namespace csharp_loops_and_string_manipulation
       do
       {
         Console.Write(message);
-        string input = Console.ReadLine();
+        string? input = Console.ReadLine();
 
         isValid = int.TryParse(input, out age);
 
